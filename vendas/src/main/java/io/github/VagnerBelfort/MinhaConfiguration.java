@@ -8,6 +8,11 @@ public class MinhaConfiguration {
 
     @Bean(name = "applicationName")
     public String applicationName(){
-        return "sistema de vendas";
+        return "Sistema de Vendas";
+    }
+
+    @Bean(name = "outraConfiguracao")
+    public String outraConfiguracao(){
+        return "Sistema de Vendas";
     }
 }
