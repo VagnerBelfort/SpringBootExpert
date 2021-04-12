@@ -3,6 +3,7 @@ package io.github.VagnerBelfort.domain.entity;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "pedido")
@@ -22,6 +23,17 @@ public class Pedido {
     // 1000.00
     @Column(name = "total", length = 20, precision = 2)
     private BigDecimal total;
+
+    public List<ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<ItemPedido> itens) {
+        this.itens = itens;
+    }
+
+    @OneToMany(mappedBy = "pedido")
+    private List<ItemPedido> itens;
 
     public Integer getId() {
         return id;
