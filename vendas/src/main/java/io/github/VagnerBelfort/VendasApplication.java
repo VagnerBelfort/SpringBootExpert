@@ -2,7 +2,7 @@ package io.github.VagnerBelfort;
 
 
 import io.github.VagnerBelfort.domain.entity.Cliente;
-import io.github.VagnerBelfort.domain.repositorio.Clientes;
+import io.github.VagnerBelfort.domain.repository.Clientes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

@@ -1,4 +1,4 @@
-package io.github.VagnerBelfort.domain.repositorio;
+package io.github.VagnerBelfort.domain.repository;
 import io.github.VagnerBelfort.domain.entity.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
