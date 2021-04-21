@@ -43,7 +43,7 @@ public class ClienteController {
                     clientes.delete(cliente);
                     return cliente;
                 })
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NO_CONTENT, "Cliente não encontrado"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado"));
     }
 
     @PutMapping("{id}")
@@ -56,7 +56,7 @@ public class ClienteController {
                     cliente.setId(clienteExistente.getId());
                     clientes.save(cliente);
                     return clienteExistente;
-                }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NO_CONTENT, "Cliente não encontrado"));
+                }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado"));
     }
 
     @GetMapping
