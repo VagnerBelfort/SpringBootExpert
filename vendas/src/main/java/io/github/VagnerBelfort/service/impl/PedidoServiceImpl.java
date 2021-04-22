@@ -9,6 +9,7 @@ import io.github.VagnerBelfort.domain.repository.Clientes;
 import io.github.VagnerBelfort.domain.repository.ItemsPedido;
 import io.github.VagnerBelfort.domain.repository.Pedidos;
 import io.github.VagnerBelfort.domain.repository.Produtos;
+import io.github.VagnerBelfort.exception.PedidoNaoEncontradoException;
 import io.github.VagnerBelfort.exception.RegraNegocioException;
 import io.github.VagnerBelfort.rest.dto.ItemPedidoDTO;
 import io.github.VagnerBelfort.rest.dto.PedidoDTO;
@@ -55,6 +56,17 @@ public class PedidoServiceImpl implements PedidoService {
     @Override
     public Optional<Pedido> obterPedidoCompleto(Integer id) {
         return repository.findByIdFetchItens(id);
+    }
+
+    @Override
+    @Transactional
+    public void atualizaStatus(Integer id, StatusPedido statusPedido) {
+        repository
+                .findById(id)
+                .map( pedido -> {
+                    pedido.setStatus(statusPedido);
+                    return repository.save(pedido);
+                }).orElseThrow(() -> new PedidoNaoEncontradoException() );
     }
 
     private List<ItemPedido> converterItems(Pedido pedido, List<ItemPedidoDTO> items){

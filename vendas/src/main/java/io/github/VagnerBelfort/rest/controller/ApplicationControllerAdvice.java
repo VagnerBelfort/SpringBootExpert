@@ -1,5 +1,6 @@
 package io.github.VagnerBelfort.rest.controller;
 
+import io.github.VagnerBelfort.exception.PedidoNaoEncontradoException;
 import io.github.VagnerBelfort.exception.RegraNegocioException;
 import io.github.VagnerBelfort.rest.ApiErros;
 import org.springframework.http.HttpStatus;
@@ -16,5 +17,11 @@ public class ApplicationControllerAdvice {
     public ApiErros handleRegraNegocioException(RegraNegocioException ex){
         String mensagemErro = ex.getMessage();
         return new ApiErros(mensagemErro);
+    }
+
+    @ExceptionHandler(PedidoNaoEncontradoException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiErros handlePedidoNotFoundException(PedidoNaoEncontradoException ex){
+        return new ApiErros(ex.getMessage());
     }
 }
