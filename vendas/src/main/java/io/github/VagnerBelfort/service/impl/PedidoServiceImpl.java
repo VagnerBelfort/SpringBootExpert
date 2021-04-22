@@ -4,6 +4,7 @@ import io.github.VagnerBelfort.domain.entity.ItemPedido;
 import io.github.VagnerBelfort.domain.entity.Pedido;
 import io.github.VagnerBelfort.domain.entity.Cliente;
 import io.github.VagnerBelfort.domain.entity.Produto;
+import io.github.VagnerBelfort.domain.enums.StatusPedido;
 import io.github.VagnerBelfort.domain.repository.Clientes;
 import io.github.VagnerBelfort.domain.repository.ItemsPedido;
 import io.github.VagnerBelfort.domain.repository.Pedidos;
@@ -19,6 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -41,12 +43,18 @@ public class PedidoServiceImpl implements PedidoService {
         pedido.setTotal(dto.getTotal());
         pedido.setDataPedido(LocalDate.now());
         pedido.setCliente(cliente);
+        pedido.setStatus(StatusPedido.REALIZADO);
 
         List<ItemPedido> itemsPedido = converterItems(pedido, dto.getItems());
         repository.save(pedido);
         itemsPedidoRepository.saveAll(itemsPedido);
         pedido.setItens(itemsPedido);
         return pedido;
+    }
+
+    @Override
+    public Optional<Pedido> obterPedidoCompleto(Integer id) {
+        return repository.findByIdFetchItens(id);
     }
 
     private List<ItemPedido> converterItems(Pedido pedido, List<ItemPedidoDTO> items){
