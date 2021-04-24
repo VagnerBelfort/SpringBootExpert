@@ -1,6 +1,5 @@
 package io.github.VagnerBelfort.rest.dto;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
