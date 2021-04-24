@@ -49,7 +49,7 @@ public class ClienteController {
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update( @PathVariable Integer id,
+    public void update( @PathVariable @Valid Integer id,
                                   @RequestBody Cliente cliente ) {
         clientes
                 .findById(id)
